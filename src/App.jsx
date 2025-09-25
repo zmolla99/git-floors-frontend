@@ -6,7 +6,7 @@ const ScrollingElevatorChangelog = () => {
   const [isMoving, setIsMoving] = useState(false);
   const containerRef = useRef(null);
 
-  // Mock data in the new structure
+  // Mock data - this can now be any length
   const mockVersions = {
     versions: [
       {
@@ -119,8 +119,22 @@ const ScrollingElevatorChangelog = () => {
         ]
       },
       {
-        pr_title: "Initial Project Setup and Core Features",
+        pr_title: "Latest Features and Improvements",
         version: "v3.1.0",
+        pr_description: "Adding the latest features including enhanced user experience, improved performance metrics, and expanded API capabilities. This release focuses on scalability and user satisfaction.",
+        pr_reviewers: ["Alice Chen", "Bob Martinez", "Carol Kim"],
+        pr_raiser: "David Johnson",
+        commits: [
+          { message: "🚀 Enhanced user experience improvements", author: "Alice Chen", link: "https://github.com/company/repo/commit/a1b2c3d", id: "a1b2c3d" },
+          { message: "📊 Performance metrics dashboard", author: "Bob Martinez", link: "https://github.com/company/repo/commit/e4f5g6h", id: "e4f5g6h" },
+          { message: "🔧 Expanded API capabilities", author: "Carol Kim", link: "https://github.com/company/repo/commit/i7j8k9l", id: "i7j8k9l" },
+          { message: "⚡ Scalability improvements", author: "David Johnson", link: "https://github.com/company/repo/commit/m1n2o3p", id: "m1n2o3p" },
+          { message: "😊 User satisfaction enhancements", author: "Eve Rodriguez", link: "https://github.com/company/repo/commit/q4r5s6t", id: "q4r5s6t" }
+        ]
+      },
+       {
+        pr_title: "Initial Project Setup and Core Features",
+        version: "v3.1.1",
         pr_description: "Setting up the foundation of our application with authentication, UI framework, and basic functionality. This PR establishes the core architecture and essential components needed for the initial release.",
         pr_reviewers: ["Alice Chen", "Bob Martinez", "Carol Kim"],
         pr_raiser: "David Johnson",
@@ -131,12 +145,55 @@ const ScrollingElevatorChangelog = () => {
           { message: "📱 Mobile layout optimizations", author: "David Johnson", link: "https://github.com/company/repo/commit/m1n2o3p", id: "m1n2o3p" },
           { message: "🔧 Database schema initialization", author: "Eve Rodriguez", link: "https://github.com/company/repo/commit/q4r5s6t", id: "q4r5s6t" }
         ]
+      },
+      {
+        pr_title: "Enhanced Search and Dark Mode Features",
+        version: "v4.0.0",
+        pr_description: "Adding advanced search capabilities with filtering options and implementing a dark mode toggle. This update also includes performance optimizations and bug fixes for session management.",
+        pr_reviewers: ["Frank Thompson", "Grace Liu"],
+        pr_raiser: "Henry Davis",
+        commits: [
+          { message: "🔍 Add advanced search with filters", author: "Frank Thompson", link: "https://github.com/company/repo/commit/u7v8w9x", id: "u7v8w9x" },
+          { message: "🌙 Implement dark mode toggle", author: "Grace Liu", link: "https://github.com/company/repo/commit/y1z2a3b", id: "y1z2a3b" },
+          { message: "⚡ Optimize database queries for speed", author: "Henry Davis", link: "https://github.com/company/repo/commit/c4d5e6f", id: "c4d5e6f" },
+          { message: "🐛 Fix session timeout issues", author: "Iris Wilson", link: "https://github.com/company/repo/commit/g7h8i9j", id: "g7h8i9j" },
+          { message: "📊 Add basic analytics tracking", author: "Jack Brown", link: "https://github.com/company/repo/commit/k1l2m3n", id: "k1l2m3n" }
+        ]
+      },
+      {
+        pr_title: "User Profile Management and Dashboard Improvements",
+        version: "v4.2.0",
+        pr_description: "Introducing comprehensive user profile management with an interactive dashboard. This release includes push notifications, improved navigation with breadcrumbs, and enhanced UI components.",
+        pr_reviewers: ["Kate Miller", "Liam Garcia", "Mia Taylor"],
+        pr_raiser: "Noah Anderson",
+        commits: [
+          { message: "👥 Build user profile management", author: "Kate Miller", link: "https://github.com/company/repo/commit/o4p5q6r", id: "o4p5q6r" },
+          { message: "🔔 Implement push notification system", author: "Liam Garcia", link: "https://github.com/company/repo/commit/s7t8u9v", id: "s7t8u9v" },
+          { message: "📊 Create interactive dashboard", author: "Mia Taylor", link: "https://github.com/company/repo/commit/w1x2y3z", id: "w1x2y3z" },
+          { message: "🎯 Improve navigation with breadcrumbs", author: "Noah Anderson", link: "https://github.com/company/repo/commit/a4b5c6d", id: "a4b5c6d" },
+          { message: "🎨 Enhance UI component library", author: "Olivia Thomas", link: "https://github.com/company/repo/commit/e7f8g9h", id: "e7f8g9h" }
+        ]
       }
     ]
   };
 
   const changelogData = mockVersions.versions;
   const totalFloors = changelogData.length;
+
+  // Dynamic calculations based on number of versions
+  const getFloorPosition = (index) => {
+    if (totalFloors <= 1) return 50; // Single item centered
+    // Distribute floors evenly with padding from top and bottom
+    const padding = 8; // 8% padding from top and bottom
+    const availableSpace = 100 - (2 * padding);
+    return padding + ((totalFloors - 1 - index) / (totalFloors - 1)) * availableSpace;
+  };
+
+  const getShaftGridLines = () => {
+    // Generate appropriate number of grid lines based on total floors
+    const lineCount = Math.max(10, totalFloors * 2);
+    return Array.from({ length: lineCount }, (_, i) => i);
+  };
 
   // Determine version type from version string
   const getVersionType = (version) => {
@@ -149,28 +206,28 @@ const ScrollingElevatorChangelog = () => {
     const type = getVersionType(version);
     switch (type) {
       case 'major': return {
-        bg: 'linear-gradient(to right, #ef4444, #ea580c)',
-        border: '#f87171',
-        text: '#fef2f2',
-        icon: '#fca5a5'
+        bg: '#943f61', // UCL Dark Pink
+        border: '#943f61',
+        text: '#ffffff',
+        icon: '#ffffff'
       };
       case 'minor': return {
-        bg: 'linear-gradient(to right, #3b82f6, #4f46e5)', 
-        border: '#60a5fa',
-        text: '#eff6ff',
-        icon: '#93c5fd'
+        bg: '#0f1419', // UCL Dark Blue
+        border: '#0f1419',
+        text: '#ffffff',
+        icon: '#ffffff'
       };
       case 'patch': return {
-        bg: 'linear-gradient(to right, #10b981, #059669)',
-        border: '#34d399', 
-        text: '#f0fdf4',
-        icon: '#6ee7b7'
+        bg: '#8b0000', // UCL Dark Red
+        border: '#8b0000',
+        text: '#ffffff',
+        icon: '#ffffff'
       };
       default: return {
-        bg: 'linear-gradient(to right, #8b5cf6, #ec4899)',
-        border: '#a78bfa',
-        text: '#faf5ff', 
-        icon: '#c4b5fd'
+        bg: '#500778', // UCL Purple
+        border: '#500778',
+        text: '#ffffff', 
+        icon: '#ffffff'
       };
     }
   };
@@ -186,65 +243,60 @@ const ScrollingElevatorChangelog = () => {
   };
 
   // Handle scroll to change floors
-  useEffect(() => {
-    const handleScroll = () => {
-      if (isMoving) return;
-      
-      const container = containerRef.current;
-      if (!container) return;
-      
-      const scrollTop = container.scrollTop;
-      const containerHeight = container.clientHeight;
-      const totalHeight = container.scrollHeight - containerHeight;
-      
-      if (totalHeight <= 0) return;
-      
-      const scrollPercent = scrollTop / totalHeight;
-      const targetFloor = Math.round(scrollPercent * (totalFloors - 1));
-      
-      if (targetFloor !== currentFloor) {
-        setCurrentFloor(targetFloor);
-      }
-    };
-
-    const container = containerRef.current;
-    if (container) {
-      container.addEventListener('scroll', handleScroll, { passive: true });
-      return () => container.removeEventListener('scroll', handleScroll);
-    }
-  }, [currentFloor, isMoving, totalFloors]);
-
-  // Auto-scroll to floor when clicking floor indicators
-  const scrollToFloor = (targetFloor) => {
+  const handleScroll = () => {
     if (isMoving) return;
-    
-    setIsMoving(true);
-    setCurrentFloor(targetFloor); // Immediately update floor for visual feedback
-    
+
     const container = containerRef.current;
     if (!container) return;
-    
-    const containerHeight = container.clientHeight;
-    const totalHeight = container.scrollHeight - containerHeight;
-    const targetScroll = (targetFloor / (totalFloors - 1)) * totalHeight;
-    
+
+    const scrollTop = container.scrollTop;
+    const floorElements = container.children;
+
+    let newFloor = 0;
+    for (let i = 0; i < floorElements.length; i++) {
+      // Calculate offset relative to container, not the page
+      const floorTop = floorElements[i].offsetTop - container.offsetTop;
+      if (floorTop > scrollTop + 10) { // small buffer
+        break;
+      }
+      newFloor = i;
+    }
+
+    if (newFloor !== currentFloor) {
+      setCurrentFloor(newFloor);
+    }
+  };
+
+  const scrollToFloor = (targetFloor) => {
+    if (isMoving) return;
+
+    const container = containerRef.current;
+    if (!container) return;
+
+    const floorElements = container.children;
+    const targetTop = floorElements[targetFloor]?.offsetTop - container.offsetTop || 0;
+
+    setIsMoving(true);
+    setCurrentFloor(targetFloor);
+
     container.scrollTo({
-      top: targetScroll,
+      top: targetTop,
       behavior: 'smooth'
     });
-    
-    // Reset moving state after animation completes
+
     setTimeout(() => {
       setIsMoving(false);
-      // Double-check floor position after scroll animation
-      const finalScrollTop = container.scrollTop;
-      const finalScrollPercent = finalScrollTop / totalHeight;
-      const finalFloor = Math.round(finalScrollPercent * (totalFloors - 1));
-      if (finalFloor !== targetFloor) {
-        setCurrentFloor(finalFloor);
-      }
-    }, 1000);
+    }, 700);
   };
+
+  // Add scroll event listener
+  useEffect(() => {
+    const container = containerRef.current;
+    if (container) {
+      container.addEventListener('scroll', handleScroll);
+      return () => container.removeEventListener('scroll', handleScroll);
+    }
+  }, [currentFloor, isMoving]);
 
   const styles = {
     container: {
@@ -255,7 +307,8 @@ const ScrollingElevatorChangelog = () => {
       overflow: 'hidden',
       position: 'fixed',
       top: 0,
-      left: 0
+      left: 0,
+      fontFamily: 'Arial, sans-serif'
     },
     mainFlex: {
       width: '100%',
@@ -323,13 +376,13 @@ const ScrollingElevatorChangelog = () => {
       position: 'absolute',
       width: '64px',
       height: '80px',
-      background: 'linear-gradient(to bottom, #fbbf24, #d97706)',
+      background: '#fbbf24', // UCL Gold
       borderRadius: '8px',
       boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
       transition: 'all 0.7s ease-in-out',
       border: '2px solid #fcd34d',
-      right: '20px',
-      transform: 'translateY(50%)'
+      left: '72px', // Align with the floor buttons
+      transform: 'translateY(-50%)'
     },
     elevatorInterior: {
       position: 'absolute',
@@ -337,7 +390,7 @@ const ScrollingElevatorChangelog = () => {
       left: '4px',
       right: '4px',
       bottom: '4px',
-      background: 'linear-gradient(to bottom, #fcd34d, #f59e0b)',
+      background: '#f59e0b', // Slightly darker gold
       borderRadius: '4px',
       display: 'flex',
       flexDirection: 'column'
@@ -374,7 +427,6 @@ const ScrollingElevatorChangelog = () => {
     floorDisplay: {
       position: 'absolute',
       top: '16px',
-      left: '80px',
       right: '16px',
       backgroundColor: '#1f2937',
       borderRadius: '8px',
@@ -409,10 +461,8 @@ const ScrollingElevatorChangelog = () => {
       fontSize: '28px',
       fontWeight: 'bold',
       marginBottom: '8px',
-      background: 'linear-gradient(to right, #fbbf24, #f59e0b)',
-      WebkitBackgroundClip: 'text',
-      WebkitTextFillColor: 'transparent',
-      backgroundClip: 'text'
+      color: '#fbbf24', // UCL Gold
+      fontFamily: 'Arial, sans-serif'
     },
     subtitle: {
       color: '#d1d5db',
@@ -548,8 +598,8 @@ const ScrollingElevatorChangelog = () => {
       <style>
         {`
           @keyframes elevator-move {
-            0%, 100% { transform: translateY(50%); }
-            50% { transform: translateY(50%) scale(1.05); }
+            0%, 100% { transform: translateY(-50%); }
+            50% { transform: translateY(-50%) scale(1.05); }
           }
           
           @keyframes floor-ding {
@@ -566,22 +616,21 @@ const ScrollingElevatorChangelog = () => {
             
             {/* Elevator Shaft Background */}
             <div style={styles.shaftBackground}>
-              {/* Shaft grid lines */}
-              {Array.from({ length: 20 }, (_, i) => (
+              {/* Dynamic shaft grid lines */}
+              {getShaftGridLines().map((i) => (
                 <div 
                   key={i} 
-                  style={{...styles.shaftLines, top: `${i * 5}%`}}
+                  style={{...styles.shaftLines, top: `${(i / getShaftGridLines().length) * 100}%`}}
                 />
               ))}
             </div>
 
-            {/* Floor Indicators - Floor 1 at bottom, Floor 8 at top */}
+            {/* Floor Indicators - Dynamic positioning */}
             <div style={styles.floorIndicators}>
               {changelogData.map((data, index) => {
                 const colors = getVersionColor(data.version);
                 const floorNumber = index + 1;
-                // Floor 1 (index 0) at bottom, Floor 8 (index 7) at top
-                const topPosition = ((changelogData.length - 1 - index) / (changelogData.length - 1)) * 84 + 8;
+                const topPosition = getFloorPosition(index);
                 
                 const isActive = currentFloor === index;
                 const buttonStyle = {
@@ -617,12 +666,11 @@ const ScrollingElevatorChangelog = () => {
               })}
             </div>
 
-            {/* Elevator Car with GitHub passenger */}
+            {/* Elevator Car - Dynamic positioning */}
             <div 
               style={{
                 ...styles.elevatorCar,
-                // Floor 1 (index 0) at bottom, Floor 8 (index 7) at top
-                top: `${8 + ((changelogData.length - 1 - currentFloor) / (totalFloors - 1)) * 84}%`,
+                top: `${getFloorPosition(currentFloor)}%`,
                 animation: isMoving ? 'elevator-move 0.8s ease-in-out' : 'none',
                 transition: isMoving ? 'none' : 'all 0.7s ease-in-out'
               }}
@@ -680,10 +728,10 @@ const ScrollingElevatorChangelog = () => {
               <h1 style={styles.title}>
                 git-floors-demo-repo - Change Logs
               </h1>
-              <p style={styles.subtitle}>Enjoy the ride!</p>
+              <p style={styles.subtitle}>Enjoy the ride through our development journey!</p>
             </div>
 
-            {/* Scrollable Content - Start from v1.0.0 at top, scroll down to v3.0.0 */}
+            {/* Scrollable Content - Start from v1.0.0 at top, scroll down to latest */}
             <div 
               ref={containerRef}
               style={styles.scrollableContent}
@@ -841,15 +889,15 @@ const ScrollingElevatorChangelog = () => {
                         ))}
                       </div>
 
-                      {/* Floor Navigation Hint */}
+                      {/* Floor Navigation Hint - Dynamic text based on position */}
                       <div style={styles.floorNavigation}>
-                        <p>Floor {index + 1} of {totalFloors}</p>
+                        <p>Floor {index + 1} of {totalFloors} - {release.version}</p>
                         <p style={{fontSize: '14px'}}>
                           {index === 0 
                             ? "You're on Floor 1 with the initial release! Scroll down to explore newer versions." 
                             : index === totalFloors - 1
-                              ? "You've reached Floor 8 with the latest release! Scroll up to go back."
-                              : "Continue scrolling to explore more releases"
+                              ? "You've reached the top floor with the latest release! Great work team!"
+                              : "Continue scrolling to explore more releases in our development journey"
                           }
                         </p>
                       </div>
