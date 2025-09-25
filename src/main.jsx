@@ -8,7 +8,7 @@ const Root = () => {
   const [showLoader, setShowLoader] = useState(true);
 
   useEffect(() => {
-    const openTimer = setTimeout(() => setDoorsOpen(true), 2000);
+    const openTimer = setTimeout(() => setDoorsOpen(true), 3000);
     const removeTimer = setTimeout(() => setShowLoader(false), 5000);
     return () => {
       clearTimeout(openTimer);

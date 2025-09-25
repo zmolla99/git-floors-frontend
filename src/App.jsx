@@ -12,7 +12,7 @@ const mockVersions = {
       pr_reviewers: ["Alice Chen", "Bob Martinez", "Carol Kim"],
       pr_raiser: "David Johnson",
       commits: [
-        { message: "🎉 Initial project setup and configuration", author: "Alice Chen", link: "https://github.com/company/repo/commit/a1b2c3d", id: "a1b2c3d" },
+        { message: "🎉 Initial project setup and configuration", author: "Alice Chen", link: "https://github.com/company/repo/commit/a1b2c3d", commit_id: "a1b2c3d" },
         { message: "✨ Implement core authentication system", author: "Bob Martinez", link: "https://github.com/company/repo/commit/e4f5g6h", id: "e4f5g6h" },
         { message: "🎨 Add responsive UI framework", author: "Carol Kim", link: "https://github.com/company/repo/commit/i7j8k9l", id: "i7j8k9l" },
         { message: "📱 Mobile layout optimizations", author: "David Johnson", link: "https://github.com/company/repo/commit/m1n2o3p", id: "m1n2o3p" },
@@ -927,7 +927,7 @@ const ScrollingElevatorChangelog = () => {
                                       e.target.style.backgroundColor = '#1f2937';
                                     }}
                                   >
-                                    {commit.id}
+                                    {commit.commit_id}
                                   </a>
                                   <span style={styles.commitAuthor}>
                                     by {commit.author}
