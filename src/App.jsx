@@ -94,7 +94,7 @@ const mockVersions = {
       pr_reviewers: ["Carl Davis", "Dana Garcia", "Ethan Brown"],
       pr_raiser: "Fiona Miller",
       commits: [
-        { message: "🐛 Fix memory leak in dashboard", author: "Carl Davis", link: "https://github.com/company/repo/commit/i4j5k6l", id: "i4j5k6l" },
+        { message: "🐛 Fix memory leak in dashboard", author: "Carl Davis", link: "https://github.com/company/repo/commit/i4j5k6l", id: "i4j5k6li4j5k6li4j5k6li4j5k6li4j5k6li4j5k6li4j5k6li4j5k6l" },
         { message: "🔧 Resolve API timeout issues", author: "Dana Garcia", link: "https://github.com/company/repo/commit/m7n8o9p", id: "m7n8o9p" },
         { message: "⚡ Optimize mobile performance", author: "Ethan Brown", link: "https://github.com/company/repo/commit/q1r2s3t", id: "q1r2s3t" },
         { message: "🔐 Patch security vulnerability", author: "Fiona Miller", link: "https://github.com/company/repo/commit/u4v5w6x", id: "u4v5w6x" }
@@ -175,7 +175,7 @@ const mockVersions = {
 
 const ScrollingElevatorChangelog = () => {
 
-  const [changelogData, setChangelogData] = useState([])
+  const [changelogData, setChangelogData] = useState(mockVersions.versions)
   const [currentFloor, setCurrentFloor] = useState(0);
   const [isMoving, setIsMoving] = useState(false);
   const containerRef = useRef(null);
