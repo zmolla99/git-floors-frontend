@@ -2,9 +2,22 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Calendar, GitCommit, Star, Zap, Shield } from 'lucide-react';
 
 const ScrollingElevatorChangelog = () => {
+
+  useEffect(() => {
+  // Simulate clicking the top floor after a short delay
+  const timer = setTimeout(() => {
+    scrollToFloor(totalFloors - 1);
+  }, 500); // 500ms delay to allow DOM to mount
+
+  return () => clearTimeout(timer);
+}, []); // empty dependency => runs once on mount
+
   const [currentFloor, setCurrentFloor] = useState(0);
   const [isMoving, setIsMoving] = useState(false);
   const containerRef = useRef(null);
+  const bellRef = useRef(null); // <-- ADD THIS
+
+  
 
   // Mock data - this can now be any length
   const mockVersions = {
@@ -278,6 +291,11 @@ const ScrollingElevatorChangelog = () => {
 
     setIsMoving(true);
     setCurrentFloor(targetFloor);
+
+    if (bellRef.current) {
+    bellRef.current.currentTime = 0; // reset to start
+    bellRef.current.play().catch(err => console.log("Bell blocked:", err));
+    }
 
     container.scrollTo({
       top: targetTop,
@@ -608,6 +626,11 @@ const ScrollingElevatorChangelog = () => {
           }
         `}
       </style>
+      <audio 
+  ref={bellRef} 
+  src="/public/elevator-ding.mp3"
+  preload="auto" 
+/>
       <div style={styles.mainFlex}>
         
         {/* Elevator Shaft */}

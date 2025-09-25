@@ -1,0 +1,51 @@
+/* Full-screen elevator doors container */
+.elevator-doors {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+/* Individual doors */
+.door {
+  flex: 1;
+  height: 100%;
+  background: linear-gradient(to bottom, #444, #222);
+  box-shadow: inset 0 0 50px rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 1.2s ease-in-out;
+}
+
+/* Small elevator lights inside doors */
+.door span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fbbf24;
+  box-shadow: 0 0 12px #fbbf24;
+}
+
+/* Left door initial position */
+.door.left-door {
+  transform: translateX(0);
+}
+
+/* Right door initial position */
+.door.right-door {
+  transform: translateX(0);
+}
+
+/* Open state: doors slide out */
+.elevator-doors.open .door.left-door {
+  transform: translateX(-100%);
+}
+
+.elevator-doors.open .door.right-door {
+  transform: translateX(100%);
+}
