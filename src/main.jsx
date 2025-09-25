@@ -9,7 +9,7 @@ const Root = () => {
 
   useEffect(() => {
     // Start opening doors after a short delay
-    const openTimer = setTimeout(() => setDoorsOpen(true), 100); // small delay for animation
+    const openTimer = setTimeout(() => setDoorsOpen(true), 500); // small delay for animation
 
     // Remove loader after animation duration
     const removeTimer = setTimeout(() => setShowLoader(false), 1300); // match CSS transition (1.2s)

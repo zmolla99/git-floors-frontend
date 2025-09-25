@@ -49,3 +49,16 @@
 .elevator-doors.open .door.right-door {
   transform: translateX(100%);
 }
+
+
+.logo {
+  position: fixed;      /* stay in place even when scrolling */
+  top: 16px;            /* distance from top */
+  right: 16px;          /* distance from right */
+  width: 80px;          /* adjust size as needed */
+  height: auto;         /* maintain aspect ratio */
+  z-index: 9999;        /* ensure it’s above doors/app content */
+  border-radius: 12px;  /* curve corners */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* optional subtle shadow */
+}
+

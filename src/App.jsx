@@ -444,13 +444,13 @@ const ScrollingElevatorChangelog = () => {
     },
     floorDisplay: {
       position: 'absolute',
-      top: '16px',
+      top: '40%',
       right: '16px',
       backgroundColor: '#1f2937',
       borderRadius: '8px',
       padding: '12px',
       border: '1px solid #4b5563',
-      width: "200px"
+      width: "150px",
     },
     floorDisplayText: {
       textAlign: 'center'
@@ -752,6 +752,7 @@ const ScrollingElevatorChangelog = () => {
                 git-floors-demo-repo - Change Logs
               </h1>
               <p style={styles.subtitle}>Enjoy the ride through our development journey!</p>
+              <img src='/UCL.png' className='logo'/>
             </div>
 
             {/* Scrollable Content - Start from v1.0.0 at top, scroll down to latest */}
