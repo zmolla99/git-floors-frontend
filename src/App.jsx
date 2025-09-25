@@ -182,34 +182,10 @@ const ScrollingElevatorChangelog = () => {
   const bellRef = useRef(null); // <-- ADD THIS
 
   const API_URL = 'https://hackathon-autumn.mesh-dev.ucl.ac.uk/pull-request/v0.1/closed-pr/tc-wood/gitfloors-demo-repo';
-  const TOKEN_URL = 'https://login.microsoftonline.com/1faf88fe-a998-4c5b-93c9-210a11d9a5c2/oauth2/v2.0/token';
-
-  const client_id = ""; // your client_id
-  const client_secret = ""; // your client_secret
-  const target_client_id = ""; // your target client id
-
-  const fetchToken = async () => {
-    const params = new URLSearchParams();
-    params.append('grant_type', 'client_credentials');
-    params.append('client_id', client_id);
-    params.append('client_secret', client_secret);
-    params.append('scope', `${target_client_id}/.default`);
-
-    try {
-      const res = await axios.post(TOKEN_URL, params, {
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-      });
-      console.log(res.data.access_token)
-      return res.data.access_token;
-    } catch (err) {
-      console.error('Error fetching token:', err);
-      return null;
-    }
-  };
 
 
   const fetchChangelogData = async () => {
-    const token = await fetchToken();
+    const token = "";
     if (!token) return;
 
     try {
@@ -678,7 +654,7 @@ const ScrollingElevatorChangelog = () => {
       </style>
       <audio
         ref={bellRef}
-        src="/public/elevator-ding.mp3"
+        src="/elevator-ding.mp3"
         preload="auto"
       />
       <div style={styles.mainFlex}>
