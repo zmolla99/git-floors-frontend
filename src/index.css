@@ -1,3 +1,7 @@
+body {
+  font-family: 'Arial', sans-serif;
+}
+
 /* Full-screen elevator doors container */
 .elevator-doors {
   position: fixed;
@@ -20,6 +24,7 @@
   align-items: center;
   justify-content: center;
   transition: transform 1.2s ease-in-out;
+  position: relative;
 }
 
 /* Small elevator lights inside doors */
@@ -50,15 +55,59 @@
   transform: translateX(100%);
 }
 
-
-.logo {
-  position: fixed;      /* stay in place even when scrolling */
-  top: 16px;            /* distance from top */
-  right: 16px;          /* distance from right */
-  width: 80px;          /* adjust size as needed */
-  height: auto;         /* maintain aspect ratio */
-  z-index: 9999;        /* ensure it’s above doors/app content */
-  border-radius: 12px;  /* curve corners */
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* optional subtle shadow */
+/* Text attached to doors */
+.door-text {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 48px;
+  font-weight: bold;
+  color: #fbbf24; /* darker orange */
+  letter-spacing: 2px;
+  text-shadow:
+    0 0 3px #fbbf24,
+    0 0 6px #fbbf24,
+    0 0 12px #fbbf24,
+    0 0 20px #fbbf24;
+  pointer-events: none;
+  animation: flicker 3s infinite alternate; /* slower flicker */
 }
 
+/* Neon flicker animation */
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    opacity: 1;
+    text-shadow:
+      0 0 3px #fbbf24,
+      0 0 6px #fbbf24,
+      0 0 12px #fbbf24,
+      0 0 20px #fbbf24;
+  }
+  20%, 22%, 24%, 55% {
+    opacity: 0.7;
+    text-shadow: none;
+  }
+}
+
+
+
+.left-text {
+  right: 10%; /* position near inner edge of left door */
+}
+
+.right-text {
+  left: 10%; /* position near inner edge of right door */
+}
+
+
+
+.logo {
+  position: fixed;      
+  top: 16px;            
+  right: 16px;          
+  width: 80px;          
+  height: auto;         
+  z-index: 9999;        
+  border-radius: 12px;  
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2); 
+}

@@ -219,26 +219,26 @@ const ScrollingElevatorChangelog = () => {
     const type = getVersionType(version);
     switch (type) {
       case 'major': return {
-        bg: '#943f61', // UCL Dark Pink
-        border: '#943f61',
+        bg: '#0f198cff',
+        border: '#0f198cff',
         text: '#ffffff',
         icon: '#ffffff'
       };
       case 'minor': return {
-        bg: '#0f1419', // UCL Dark Blue
-        border: '#0f1419',
+        bg: '#0b5aa9ff',
+        border: '#0b5aa9ff',
         text: '#ffffff',
         icon: '#ffffff'
       };
       case 'patch': return {
-        bg: '#8b0000', // UCL Dark Red
-        border: '#8b0000',
+        bg: '#4296d2ff', 
+        border: '#4296d2ff',
         text: '#ffffff',
         icon: '#ffffff'
       };
       default: return {
-        bg: '#500778', // UCL Purple
-        border: '#500778',
+        bg: '#071c78ff', 
+        border: '#071c78ffx',
         text: '#ffffff', 
         icon: '#ffffff'
       };
@@ -326,7 +326,6 @@ const ScrollingElevatorChangelog = () => {
       position: 'fixed',
       top: 0,
       left: 0,
-      fontFamily: 'Arial, sans-serif'
     },
     mainFlex: {
       width: '100%',
