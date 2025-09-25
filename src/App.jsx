@@ -6,114 +6,133 @@ const ScrollingElevatorChangelog = () => {
   const [isMoving, setIsMoving] = useState(false);
   const containerRef = useRef(null);
 
-  // Changelog data with individual commits
-  const changelogData = [
-    {
-      version: "v1.0.0",
-      date: "2024-01-15",
-      title: "Initial Release",
-      type: "major",
-      commits: [
-        { id: "a1b2c3d", message: "🎉 Initial project setup and configuration", author: "Alice Chen", time: "10:30 AM" },
-        { id: "e4f5g6h", message: "✨ Implement core authentication system", author: "Bob Martinez", time: "2:15 PM" },
-        { id: "i7j8k9l", message: "🎨 Add responsive UI framework", author: "Carol Kim", time: "4:45 PM" },
-        { id: "m1n2o3p", message: "📱 Mobile layout optimizations", author: "David Johnson", time: "9:20 AM" },
-        { id: "q4r5s6t", message: "🔧 Database schema initialization", author: "Eve Rodriguez", time: "11:55 AM" }
-      ]
-    },
-    {
-      version: "v1.1.0",
-      date: "2024-02-20",
-      title: "Feature Enhancement",
-      type: "minor",
-      commits: [
-        { id: "u7v8w9x", message: "🔍 Add advanced search with filters", author: "Frank Thompson", time: "1:30 PM" },
-        { id: "y1z2a3b", message: "🌙 Implement dark mode toggle", author: "Grace Liu", time: "3:45 PM" },
-        { id: "c4d5e6f", message: "⚡ Optimize database queries for speed", author: "Henry Davis", time: "10:15 AM" },
-        { id: "g7h8i9j", message: "🐛 Fix session timeout issues", author: "Iris Wilson", time: "5:20 PM" },
-        { id: "k1l2m3n", message: "📊 Add basic analytics tracking", author: "Jack Brown", time: "8:30 AM" }
-      ]
-    },
-    {
-      version: "v1.2.0",
-      date: "2024-03-10",
-      title: "User Experience Update",
-      type: "minor",
-      commits: [
-        { id: "o4p5q6r", message: "👥 Build user profile management", author: "Kate Miller", time: "2:10 PM" },
-        { id: "s7t8u9v", message: "🔔 Implement push notification system", author: "Liam Garcia", time: "4:25 PM" },
-        { id: "w1x2y3z", message: "📊 Create interactive dashboard", author: "Mia Taylor", time: "9:45 AM" },
-        { id: "a4b5c6d", message: "🎯 Improve navigation with breadcrumbs", author: "Noah Anderson", time: "11:30 AM" },
-        { id: "e7f8g9h", message: "🎨 Enhance UI component library", author: "Olivia Thomas", time: "3:15 PM" }
-      ]
-    },
-    {
-      version: "v1.3.1",
-      date: "2024-04-05",
-      title: "Security Patches",
-      type: "patch",
-      commits: [
-        { id: "i1j2k3l", message: "🔐 Add two-factor authentication", author: "Paul Jackson", time: "10:45 AM" },
-        { id: "m4n5o6p", message: "🐛 Fix critical XSS vulnerability", author: "Quinn White", time: "1:20 PM" },
-        { id: "q7r8s9t", message: "⚡ Improve page load performance", author: "Ruby Harris", time: "3:50 PM" },
-        { id: "u1v2w3x", message: "🔄 Update dependency versions", author: "Sam Clark", time: "8:15 AM" }
-      ]
-    },
-    {
-      version: "v2.0.0",
-      date: "2024-05-15",
-      title: "Major Redesign",
-      type: "major",
-      commits: [
-        { id: "y4z5a6b", message: "🎨 Complete UI/UX redesign", author: "Tina Rodriguez", time: "9:30 AM" },
-        { id: "c7d8e9f", message: "🤖 Integrate AI recommendation engine", author: "Uma Patel", time: "11:45 AM" },
-        { id: "g1h2i3j", message: "☁️ Implement real-time sync", author: "Victor Kim", time: "2:30 PM" },
-        { id: "k4l5m6n", message: "📈 Build advanced analytics suite", author: "Wendy Chen", time: "4:15 PM" },
-        { id: "o7p8q9r", message: "🔄 Launch API v2 with improvements", author: "Xavier Lopez", time: "5:45 PM" }
-      ]
-    },
-    {
-      version: "v2.1.0",
-      date: "2024-06-12",
-      title: "Smart Automation",
-      type: "minor",
-      commits: [
-        { id: "s1t2u3v", message: "🧠 Add ML-powered content suggestions", author: "Yara Wilson", time: "10:20 AM" },
-        { id: "w4x5y6z", message: "🔄 Automate workflow management", author: "Zoe Taylor", time: "1:10 PM" },
-        { id: "a7b8c9d", message: "📱 Enable progressive web app features", author: "Adam Johnson", time: "3:35 PM" },
-        { id: "e1f2g3h", message: "🎯 Smart notification prioritization", author: "Bella Martinez", time: "5:00 PM" }
-      ]
-    },
-    {
-      version: "v2.2.1",
-      date: "2024-07-08",
-      title: "Bug Fixes",
-      type: "patch",
-      commits: [
-        { id: "i4j5k6l", message: "🐛 Fix memory leak in dashboard", author: "Carl Davis", time: "9:15 AM" },
-        { id: "m7n8o9p", message: "🔧 Resolve API timeout issues", author: "Dana Garcia", time: "11:40 AM" },
-        { id: "q1r2s3t", message: "⚡ Optimize mobile performance", author: "Ethan Brown", time: "2:25 PM" },
-        { id: "u4v5w6x", message: "🔐 Patch security vulnerability", author: "Fiona Miller", time: "4:50 PM" }
-      ]
-    },
-    {
-      version: "v3.0.0",
-      date: "2024-09-20",
-      title: "Platform Revolution",
-      type: "major",
-      commits: [
-        { id: "y7z8a9b", message: "🚀 Complete platform architecture rebuild", author: "George Anderson", time: "8:00 AM" },
-        { id: "c1d2e3f", message: "⚡ Implement 10x performance improvements", author: "Hannah Thomas", time: "10:30 AM" },
-        { id: "g4h5i6j", message: "🌐 Deploy global CDN infrastructure", author: "Ian Jackson", time: "1:15 PM" },
-        { id: "k7l8m9n", message: "🎨 Launch customizable interface builder", author: "Julia White", time: "3:45 PM" },
-        { id: "o1p2q3r", message: "🔌 Create extensible plugin ecosystem", author: "Kevin Harris", time: "5:30 PM" }
-      ]
-    }
-  ];
+  // Mock data in the new structure
+  const mockVersions = {
+    versions: [
+      {
+        pr_title: "Initial Project Setup and Core Features",
+        version: "v1.0.0",
+        pr_description: "Setting up the foundation of our application with authentication, UI framework, and basic functionality. This PR establishes the core architecture and essential components needed for the initial release.",
+        pr_reviewers: ["Alice Chen", "Bob Martinez", "Carol Kim"],
+        pr_raiser: "David Johnson",
+        commits: [
+          { message: "🎉 Initial project setup and configuration", author: "Alice Chen", link: "https://github.com/company/repo/commit/a1b2c3d", id: "a1b2c3d" },
+          { message: "✨ Implement core authentication system", author: "Bob Martinez", link: "https://github.com/company/repo/commit/e4f5g6h", id: "e4f5g6h" },
+          { message: "🎨 Add responsive UI framework", author: "Carol Kim", link: "https://github.com/company/repo/commit/i7j8k9l", id: "i7j8k9l" },
+          { message: "📱 Mobile layout optimizations", author: "David Johnson", link: "https://github.com/company/repo/commit/m1n2o3p", id: "m1n2o3p" },
+          { message: "🔧 Database schema initialization", author: "Eve Rodriguez", link: "https://github.com/company/repo/commit/q4r5s6t", id: "q4r5s6t" }
+        ]
+      },
+      {
+        pr_title: "Enhanced Search and Dark Mode Features",
+        version: "v1.1.0",
+        pr_description: "Adding advanced search capabilities with filtering options and implementing a dark mode toggle. This update also includes performance optimizations and bug fixes for session management.",
+        pr_reviewers: ["Frank Thompson", "Grace Liu"],
+        pr_raiser: "Henry Davis",
+        commits: [
+          { message: "🔍 Add advanced search with filters", author: "Frank Thompson", link: "https://github.com/company/repo/commit/u7v8w9x", id: "u7v8w9x" },
+          { message: "🌙 Implement dark mode toggle", author: "Grace Liu", link: "https://github.com/company/repo/commit/y1z2a3b", id: "y1z2a3b" },
+          { message: "⚡ Optimize database queries for speed", author: "Henry Davis", link: "https://github.com/company/repo/commit/c4d5e6f", id: "c4d5e6f" },
+          { message: "🐛 Fix session timeout issues", author: "Iris Wilson", link: "https://github.com/company/repo/commit/g7h8i9j", id: "g7h8i9j" },
+          { message: "📊 Add basic analytics tracking", author: "Jack Brown", link: "https://github.com/company/repo/commit/k1l2m3n", id: "k1l2m3n" }
+        ]
+      },
+      {
+        pr_title: "User Profile Management and Dashboard Improvements",
+        version: "v1.2.0",
+        pr_description: "Introducing comprehensive user profile management with an interactive dashboard. This release includes push notifications, improved navigation with breadcrumbs, and enhanced UI components.",
+        pr_reviewers: ["Kate Miller", "Liam Garcia", "Mia Taylor"],
+        pr_raiser: "Noah Anderson",
+        commits: [
+          { message: "👥 Build user profile management", author: "Kate Miller", link: "https://github.com/company/repo/commit/o4p5q6r", id: "o4p5q6r" },
+          { message: "🔔 Implement push notification system", author: "Liam Garcia", link: "https://github.com/company/repo/commit/s7t8u9v", id: "s7t8u9v" },
+          { message: "📊 Create interactive dashboard", author: "Mia Taylor", link: "https://github.com/company/repo/commit/w1x2y3z", id: "w1x2y3z" },
+          { message: "🎯 Improve navigation with breadcrumbs", author: "Noah Anderson", link: "https://github.com/company/repo/commit/a4b5c6d", id: "a4b5c6d" },
+          { message: "🎨 Enhance UI component library", author: "Olivia Thomas", link: "https://github.com/company/repo/commit/e7f8g9h", id: "e7f8g9h" }
+        ]
+      },
+      {
+        pr_title: "Critical Security Updates and Performance Patches",
+        version: "v1.3.1",
+        pr_description: "Important security patches addressing XSS vulnerabilities and adding two-factor authentication. This patch also includes performance improvements and dependency updates.",
+        pr_reviewers: ["Paul Jackson", "Quinn White", "Ruby Harris"],
+        pr_raiser: "Sam Clark",
+        commits: [
+          { message: "🔐 Add two-factor authentication", author: "Paul Jackson", link: "https://github.com/company/repo/commit/i1j2k3l", id: "i1j2k3l" },
+          { message: "🐛 Fix critical XSS vulnerability", author: "Quinn White", link: "https://github.com/company/repo/commit/m4n5o6p", id: "m4n5o6p" },
+          { message: "⚡ Improve page load performance", author: "Ruby Harris", link: "https://github.com/company/repo/commit/q7r8s9t", id: "q7r8s9t" },
+          { message: "🔄 Update dependency versions", author: "Sam Clark", link: "https://github.com/company/repo/commit/u1v2w3x", id: "u1v2w3x" }
+        ]
+      },
+      {
+        pr_title: "Complete UI Redesign with AI Integration",
+        version: "v2.0.0",
+        pr_description: "Major release featuring a complete UI/UX redesign with modern design principles. Integrates AI-powered recommendation engine, real-time synchronization, and advanced analytics suite with API v2.",
+        pr_reviewers: ["Tina Rodriguez", "Uma Patel", "Victor Kim", "Wendy Chen"],
+        pr_raiser: "Xavier Lopez",
+        commits: [
+          { message: "🎨 Complete UI/UX redesign", author: "Tina Rodriguez", link: "https://github.com/company/repo/commit/y4z5a6b", id: "y4z5a6b" },
+          { message: "🤖 Integrate AI recommendation engine", author: "Uma Patel", link: "https://github.com/company/repo/commit/c7d8e9f", id: "c7d8e9f" },
+          { message: "☁️ Implement real-time sync", author: "Victor Kim", link: "https://github.com/company/repo/commit/g1h2i3j", id: "g1h2i3j" },
+          { message: "📈 Build advanced analytics suite", author: "Wendy Chen", link: "https://github.com/company/repo/commit/k4l5m6n", id: "k4l5m6n" },
+          { message: "🔄 Launch API v2 with improvements", author: "Xavier Lopez", link: "https://github.com/company/repo/commit/o7p8q9r", id: "o7p8q9r" }
+        ]
+      },
+      {
+        pr_title: "Smart Automation and ML-Powered Features",
+        version: "v2.1.0",
+        pr_description: "Introducing machine learning powered content suggestions and automated workflow management. This release also enables progressive web app capabilities and smart notification prioritization.",
+        pr_reviewers: ["Yara Wilson", "Zoe Taylor"],
+        pr_raiser: "Adam Johnson",
+        commits: [
+          { message: "🧠 Add ML-powered content suggestions", author: "Yara Wilson", link: "https://github.com/company/repo/commit/s1t2u3v", id: "s1t2u3v" },
+          { message: "🔄 Automate workflow management", author: "Zoe Taylor", link: "https://github.com/company/repo/commit/w4x5y6z", id: "w4x5y6z" },
+          { message: "📱 Enable progressive web app features", author: "Adam Johnson", link: "https://github.com/company/repo/commit/a7b8c9d", id: "a7b8c9d" },
+          { message: "🎯 Smart notification prioritization", author: "Bella Martinez", link: "https://github.com/company/repo/commit/e1f2g3h", id: "e1f2g3h" }
+        ]
+      },
+      {
+        pr_title: "Bug Fixes and Performance Optimizations",
+        version: "v2.2.1",
+        pr_description: "Critical bug fixes addressing memory leaks in the dashboard and API timeout issues. This patch also includes mobile performance optimizations and security vulnerability patches.",
+        pr_reviewers: ["Carl Davis", "Dana Garcia", "Ethan Brown"],
+        pr_raiser: "Fiona Miller",
+        commits: [
+          { message: "🐛 Fix memory leak in dashboard", author: "Carl Davis", link: "https://github.com/company/repo/commit/i4j5k6l", id: "i4j5k6l" },
+          { message: "🔧 Resolve API timeout issues", author: "Dana Garcia", link: "https://github.com/company/repo/commit/m7n8o9p", id: "m7n8o9p" },
+          { message: "⚡ Optimize mobile performance", author: "Ethan Brown", link: "https://github.com/company/repo/commit/q1r2s3t", id: "q1r2s3t" },
+          { message: "🔐 Patch security vulnerability", author: "Fiona Miller", link: "https://github.com/company/repo/commit/u4v5w6x", id: "u4v5w6x" }
+        ]
+      },
+      {
+        pr_title: "Platform Architecture Revolution",
+        version: "v3.0.0",
+        pr_description: "Revolutionary platform architecture rebuild delivering 10x performance improvements. Features global CDN infrastructure, customizable interface builder, and extensible plugin ecosystem for maximum flexibility.",
+        pr_reviewers: ["George Anderson", "Hannah Thomas", "Ian Jackson", "Julia White"],
+        pr_raiser: "Kevin Harris",
+        commits: [
+          { message: "🚀 Complete platform architecture rebuild", author: "George Anderson", link: "https://github.com/company/repo/commit/y7z8a9b", id: "y7z8a9b" },
+          { message: "⚡ Implement 10x performance improvements", author: "Hannah Thomas", link: "https://github.com/company/repo/commit/c1d2e3f", id: "c1d2e3f" },
+          { message: "🌐 Deploy global CDN infrastructure", author: "Ian Jackson", link: "https://github.com/company/repo/commit/g4h5i6j", id: "g4h5i6j" },
+          { message: "🎨 Launch customizable interface builder", author: "Julia White", link: "https://github.com/company/repo/commit/k7l8m9n", id: "k7l8m9n" },
+          { message: "🔌 Create extensible plugin ecosystem", author: "Kevin Harris", link: "https://github.com/company/repo/commit/o1p2q3r", id: "o1p2q3r" }
+        ]
+      }
+    ]
+  };
 
+  const changelogData = mockVersions.versions;
   const totalFloors = changelogData.length;
 
-  const getVersionColor = (type) => {
+  // Determine version type from version string
+  const getVersionType = (version) => {
+    if (version.includes('.0.0')) return 'major';
+    if (version.includes('.0')) return 'minor';
+    return 'patch';
+  };
+
+  const getVersionColor = (version) => {
+    const type = getVersionType(version);
     switch (type) {
       case 'major': return {
         bg: 'linear-gradient(to right, #ef4444, #ea580c)',
@@ -142,7 +161,8 @@ const ScrollingElevatorChangelog = () => {
     }
   };
 
-  const getTypeIcon = (type) => {
+  const getTypeIcon = (version) => {
+    const type = getVersionType(version);
     switch (type) {
       case 'major': return <Star style={{width: '20px', height: '20px'}} />;
       case 'minor': return <Zap style={{width: '20px', height: '20px'}} />;
@@ -543,7 +563,7 @@ const ScrollingElevatorChangelog = () => {
             {/* Floor Indicators - Floor 1 at bottom, Floor 8 at top */}
             <div style={styles.floorIndicators}>
               {changelogData.map((data, index) => {
-                const colors = getVersionColor(data.type);
+                const colors = getVersionColor(data.version);
                 const floorNumber = index + 1;
                 // Floor 1 (index 0) at bottom, Floor 8 (index 7) at top
                 const topPosition = ((changelogData.length - 1 - index) / (changelogData.length - 1)) * 84 + 8;
@@ -654,7 +674,8 @@ const ScrollingElevatorChangelog = () => {
               style={styles.scrollableContent}
             >
               {changelogData.map((release, index) => {
-                const colors = getVersionColor(release.type);
+                const colors = getVersionColor(release.version);
+                const versionType = getVersionType(release.version);
                 const isCurrentFloor = currentFloor === index;
                 
                 return (
@@ -676,31 +697,80 @@ const ScrollingElevatorChangelog = () => {
                         <div style={styles.versionHeaderTop}>
                           <div style={styles.versionHeaderLeft}>
                             <div style={{color: colors.icon}}>
-                              {getTypeIcon(release.type)}
+                              {getTypeIcon(release.version)}
                             </div>
                             <h2 style={styles.versionNumber}>{release.version}</h2>
                             <span style={{
                               ...styles.versionBadge,
                               color: colors.text
                             }}>
-                              {release.type}
+                              {versionType}
                             </span>
                           </div>
                           <div style={styles.versionHeaderRight}>
-                            <Calendar style={{width: '20px', height: '20px'}} />
-                            <span style={{fontSize: '18px'}}>{release.date}</span>
+                            <span style={{fontSize: '16px', color: 'rgba(255, 255, 255, 0.8)'}}>
+                              Raised by: {release.pr_raiser}
+                            </span>
                           </div>
                         </div>
                         
                         <h3 style={styles.versionTitle}>
-                          {release.title}
+                          {release.pr_title}
                         </h3>
                         <p style={{
                           ...styles.versionDescription,
-                          color: colors.text
+                          color: colors.text,
+                          lineHeight: '1.5',
+                          marginBottom: '12px'
+                        }}>
+                          {release.pr_description}
+                        </p>
+                        
+                        {/* PR Reviewers */}
+                        <div style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '8px',
+                          marginTop: '8px'
+                        }}>
+                          <span style={{
+                            fontSize: '12px',
+                            color: 'rgba(255, 255, 255, 0.7)',
+                            fontWeight: '500'
+                          }}>
+                            Reviewed by:
+                          </span>
+                          <div style={{
+                            display: 'flex',
+                            flexWrap: 'wrap',
+                            gap: '6px'
+                          }}>
+                            {release.pr_reviewers.map((reviewer, reviewerIndex) => (
+                              <span
+                                key={reviewerIndex}
+                                style={{
+                                  fontSize: '12px',
+                                  backgroundColor: 'rgba(0, 0, 0, 0.3)',
+                                  color: colors.text,
+                                  padding: '4px 8px',
+                                  borderRadius: '12px',
+                                  border: `1px solid ${colors.border}`,
+                                  opacity: 0.9
+                                }}
+                              >
+                                {reviewer}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                        
+                        <div style={{
+                          fontSize: '14px',
+                          color: 'rgba(255, 255, 255, 0.8)',
+                          marginTop: '8px'
                         }}>
                           {release.commits.length} commits in this release
-                        </p>
+                        </div>
                       </div>
 
                       {/* Commits */}
@@ -725,14 +795,26 @@ const ScrollingElevatorChangelog = () => {
                               </div>
                               <div style={styles.commitDetails}>
                                 <div style={styles.commitMeta}>
-                                  <code style={styles.commitHash}>
+                                  <a
+                                    href={commit.link}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    style={{
+                                      ...styles.commitHash,
+                                      textDecoration: 'none',
+                                      cursor: 'pointer'
+                                    }}
+                                    onMouseEnter={(e) => {
+                                      e.target.style.backgroundColor = '#374151';
+                                    }}
+                                    onMouseLeave={(e) => {
+                                      e.target.style.backgroundColor = '#1f2937';
+                                    }}
+                                  >
                                     {commit.id}
-                                  </code>
+                                  </a>
                                   <span style={styles.commitAuthor}>
                                     by {commit.author}
-                                  </span>
-                                  <span style={styles.commitTime}>
-                                    {commit.time}
                                   </span>
                                 </div>
                                 <p style={styles.commitMessage}>
