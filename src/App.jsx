@@ -185,7 +185,7 @@ const ScrollingElevatorChangelog = () => {
 
 
   const fetchChangelogData = async () => {
-    const token = "";
+    const token = import.meta.env.VITE_TOKEN
     if (!token) return;
 
     try {
@@ -196,7 +196,7 @@ const ScrollingElevatorChangelog = () => {
       });
 
       if (res.data?.versions) {
-        setChangelogData(res.data.versions); // replace mockVersions
+        setChangelogData(res.data.versions.reverse());
       } else {
         console.warn('Unexpected API response:', res.data);
       }
@@ -207,13 +207,16 @@ const ScrollingElevatorChangelog = () => {
 
   useEffect(() => {
     fetchChangelogData()
+  }, [])
+
+  useEffect(() => {
     // Simulate clicking the top floor after a short delay
     const timer = setTimeout(() => {
       scrollToFloor(totalFloors - 1);
     }, 500); // 500ms delay to allow DOM to mount
 
     return () => clearTimeout(timer);
-  }, []); // empty dependency => runs once on mount
+  }, [changelogData]); // empty dependency => runs once on mount
 
 
 
@@ -418,8 +421,8 @@ const ScrollingElevatorChangelog = () => {
     },
     elevatorCar: {
       position: 'absolute',
-      width: '64px',
-      height: '80px',
+      width: '60px',
+      height: '70px',
       background: '#fbbf24', // UCL Gold
       borderRadius: '8px',
       boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
