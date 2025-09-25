@@ -117,6 +117,20 @@ const ScrollingElevatorChangelog = () => {
           { message: "🎨 Launch customizable interface builder", author: "Julia White", link: "https://github.com/company/repo/commit/k7l8m9n", id: "k7l8m9n" },
           { message: "🔌 Create extensible plugin ecosystem", author: "Kevin Harris", link: "https://github.com/company/repo/commit/o1p2q3r", id: "o1p2q3r" }
         ]
+      },
+      {
+        pr_title: "Initial Project Setup and Core Features",
+        version: "v3.1.0",
+        pr_description: "Setting up the foundation of our application with authentication, UI framework, and basic functionality. This PR establishes the core architecture and essential components needed for the initial release.",
+        pr_reviewers: ["Alice Chen", "Bob Martinez", "Carol Kim"],
+        pr_raiser: "David Johnson",
+        commits: [
+          { message: "🎉 Initial project setup and configuration", author: "Alice Chen", link: "https://github.com/company/repo/commit/a1b2c3d", id: "a1b2c3d" },
+          { message: "✨ Implement core authentication system", author: "Bob Martinez", link: "https://github.com/company/repo/commit/e4f5g6h", id: "e4f5g6h" },
+          { message: "🎨 Add responsive UI framework", author: "Carol Kim", link: "https://github.com/company/repo/commit/i7j8k9l", id: "i7j8k9l" },
+          { message: "📱 Mobile layout optimizations", author: "David Johnson", link: "https://github.com/company/repo/commit/m1n2o3p", id: "m1n2o3p" },
+          { message: "🔧 Database schema initialization", author: "Eve Rodriguez", link: "https://github.com/company/repo/commit/q4r5s6t", id: "q4r5s6t" }
+        ]
       }
     ]
   };
@@ -355,17 +369,18 @@ const ScrollingElevatorChangelog = () => {
       left: '50%',
       width: '4px',
       backgroundColor: '#4b5563',
-      height: '100%'
+      height: '100'
     },
     floorDisplay: {
       position: 'absolute',
-      bottom: '16px',
+      top: '16px',
       left: '80px',
       right: '16px',
       backgroundColor: '#1f2937',
       borderRadius: '8px',
       padding: '12px',
-      border: '1px solid #4b5563'
+      border: '1px solid #4b5563',
+      width: "200px"
     },
     floorDisplayText: {
       textAlign: 'center'
@@ -663,9 +678,9 @@ const ScrollingElevatorChangelog = () => {
           <div style={styles.changelogPanel}>
             <div style={styles.header}>
               <h1 style={styles.title}>
-                GitHub Changelog Elevator
+                git-floors-demo-repo - Change Logs
               </h1>
-              <p style={styles.subtitle}>Start at Floor 1 (v1.0.0) and ride up to Floor 8 (v3.0.0)! 🐱</p>
+              <p style={styles.subtitle}>Enjoy the ride!</p>
             </div>
 
             {/* Scrollable Content - Start from v1.0.0 at top, scroll down to v3.0.0 */}
